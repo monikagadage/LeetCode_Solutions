@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int > out;
+        
+        
+        out.push_back(nums[0]);
+        for(int i =1 ; i < nums.size() ; i++){
+            out.push_back(nums[i]*out[i-1]);
+            
+        }
+        int product = 1;
+        int n = nums.size()-1;
+        for(int j = n; j>0; j--){
+            out[j] = product*out[j-1];
+            product = product*nums[j];
+        }
+        out[0] = product;
+        return out;
+         
+    }
+     
+};
