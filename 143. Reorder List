@@ -1,0 +1,95 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    ListNode* findMid(ListNode* head){
+        
+        ListNode* prev = NULL;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast!=NULL && fast->next!=NULL){
+            prev = slow;
+            slow = slow->next;
+
+            fast = fast->next->next;
+            
+            
+        }
+        
+        prev->next = NULL;
+        
+        return slow;
+        
+    }
+    ListNode* reverList(ListNode* midNext){
+        
+       
+        
+        
+        ListNode* current = midNext;
+        ListNode* prev = NULL;
+        ListNode* next = current->next;
+        
+        while(current!=NULL){
+            
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        
+        midNext = prev;
+        return midNext;
+        
+        
+    }
+    
+    void merger(ListNode* first, ListNode* second){
+        
+        while (first != NULL && second!=NULL) {
+            ListNode* p1 = first->next;
+            ListNode* p2 = second->next;
+            
+            first->next = second;
+            if (p1 == NULL) {
+                break;
+            }
+            second->next = p1;
+            
+            first = p1;
+            second = p2;
+        }
+        
+        
+    }
+    
+    void reorderList(ListNode* head) {
+        if (head->next == NULL) {
+            return;
+        }
+        
+        ListNode* mid = findMid(head);
+
+        ListNode* revHead = reverList(mid);
+        ListNode* curr =  head;
+        
+        
+        merger(curr, revHead);        
+        
+      
+        
+        
+        
+        
+    }
+};
+
