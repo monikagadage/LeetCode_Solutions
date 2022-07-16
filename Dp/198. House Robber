@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        
+        int prev = 0;
+        int next = 0;
+        int choice =0;
+        
+        
+        
+        for(int i = 0 ; i < nums.size() ; i++ ){
+            
+            
+           choice = max(prev+nums[i],next);
+            prev = next;
+            next=choice;
+         
+            
+            
+        }
+        
+        return max(prev,next);
+    }
+};
